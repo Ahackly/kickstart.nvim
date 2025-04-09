@@ -184,7 +184,21 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- Colemak-DH movement remaps for normal & visual mode
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
+-- New movement keys for Colemak-DH
+map({ 'n', 'v' }, 'n', 'h', opts) -- n -> left
+map({ 'n', 'v' }, 'e', 'j', opts) -- e -> down
+map({ 'n', 'v' }, 'i', 'k', opts) -- i -> up
+map({ 'n', 'v' }, 'o', 'l', opts) -- o -> right
+
+-- Map the old QWERTY keys to the new Colemak-DH function
+map({ 'n', 'v' }, 'h', 'n', opts) -- h -> n (left)
+map({ 'n', 'v' }, 'j', 'e', opts) -- j -> e (down)
+map({ 'n', 'v' }, 'k', 'i', opts) -- k -> i (up)
+map({ 'n', 'v' }, 'l', 'o', opts) -- l -> o (right)
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
