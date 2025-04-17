@@ -5,7 +5,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -61,7 +61,7 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '---', trail = ' ', nbsp = '␣' }
+vim.opt.listchars = { tab = '   ', trail = ' ', nbsp = ' ' }
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
@@ -100,20 +100,14 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 -- Colemak-DH movement remaps for normal & visual mode
-local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
+local keymap = vim.keymap.set
+local keyopts = { noremap = true, silent = true }
 
--- New movement keys for Colemak-DH
-map({ 'n', 'v' }, 'm', 'h', opts) -- n -> left
-map({ 'n', 'v' }, 'n', 'j', opts) -- e -> down
-map({ 'n', 'v' }, 'e', 'k', opts) -- i -> up
-map({ 'n', 'v' }, 'i', 'l', opts) -- o -> right
-
--- Map the old QWERTY keys to the new Colemak-DH function
-map({ 'n', 'v' }, 'h', 'm', opts) -- h -> n (left)
-map({ 'n', 'v' }, 'j', 'n', opts) -- j -> e (down)
-map({ 'n', 'v' }, 'k', 'e', opts) -- k -> i (up)
-map({ 'n', 'v' }, 'l', 'i', opts) -- l -> o (right)
+-- Movement for moving half page and centering cursor
+keymap('n', '<C-d>', '<C-d>zz', keyopts) -- n -> left
+keymap('n', '<C-u>', '<C-u>zz', keyopts) -- n -> left
+keymap('n', 'n', 'nzzzv', keyopts) -- n -> left
+keymap('n', 'N', 'Nzzzv', keyopts) -- n -> left
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
@@ -181,7 +175,9 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    'ThePrimeagen/vim-be-good',
+  },
   --Harpoon setup --
   {
     'ThePrimeagen/harpoon',
